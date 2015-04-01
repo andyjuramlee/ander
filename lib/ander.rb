@@ -9,7 +9,7 @@ class Ander
 
 	def self.add_to_gemfile
 		# Include rspec, rails_spec and simplecov in Gemfile
-		puts "\nAdding rspec, rspec-rails and simplecov to the Gemfile"
+		puts "\n--Adding rspec, rspec-rails and simplecov to the Gemfile"
 		# Check if any gems already exists in Gemfile
 		rspec = false
 		rspec_rails = false
@@ -33,12 +33,15 @@ class Ander
 			open('Gemfile', 'a') { |f|
 				f.puts 'group :development, :test do'
 				unless rspec
+					puts '-Added rspec to Gemfile'
 					f.puts "  gem 'rspec'"
 				end
 				unless rspec_rails
+					puts '-Added rspec-rails to Gemfile'
 					f.puts "  gem 'rspec-rails'"
 				end
 				unless simplecov
+					puts 'Added simplecov to Gemfile'
 					f.puts "  gem 'simplecov'"
 				end
 				f.puts 'end'
@@ -49,21 +52,23 @@ class Ander
 
 	def self.bundle_install
 		# Bundle install
-    puts "\nExecuting Bundle Install"
+    puts "\n--Executing Bundle Install"
 		system('bundle install')
 	end
 
 	def self.run_setup_commands
 		# run all required setup commands for rspec
-		puts "\nRunning setup commands for rspec"
+		puts "\n--Running setup commands for rspec"
 		system('spring stop')
+		puts '-Executing rails generate rspec:install'
 		system('rails generate rspec:install')
 		system('spring stop')
 	end
 
 	def self.configure_dotrspec
 		# configure .rspec
-		puts "\nconfiguring rspec output format in .rspec"
+		puts "\n--configuring rspec output format in .rspec"
+		puts '-setting output format to progress and html'
 		open('.rspec', 'w') { |f|
 			f.puts '--color'
 			f.puts '--require spec_helper'
@@ -74,19 +79,41 @@ class Ander
 	end
 
 	def self.modify_spec_helper
-		puts "Adding require 'simplecov' and SimpleCov.Start"
+		puts "--Modifying spec_helper.rb"
 		open('spec/spec_helper.rb', 'r'){ |f|
 			simple_flag = false
+			rspec_rails = false
 			@contents = f.readlines
 			@contents.each do |i|
 				if i.include? "require 'simplecov'"
 					simple_flag = true
 				end
+				if i.include? "require 'rspec/rails'"
+					rspec_rails = true
+				end
 			end
-			unless simple_flag
+			if simple_flag
+				puts 'simplecov setting already exists in spec_helper.rb'
+			else
+				puts "-Adding require 'simplecov' to spec_helper.rb"
 				@contents.each_with_index {|i, index|
 					if i.include? "RSpec.configure do |config|\n"
-						@contents[index] = i + "  require 'simplecov'\n  SimpleCov.start\n"
+						@contents[index] =
+							i + "  require 'simplecov'\n"\
+                  "  SimpleCov.start\n"
+					end
+				}
+			end
+			if rspec_rails
+			puts 'rails environment setting already exists in spec_helper.rb'
+			else rspec_rails
+				puts "-Adding rails environment setting and require 'rspec/rails' to spec_helper.rb"
+				@contents.each_with_index {|i, index|
+					if i.include? "RSpec.configure do |config|\n"
+						@contents[index] =
+							i + "  ENV['RAILS_ENV'] = 'test'\n"\
+									"  require File.expand_path('../../config/environment', __FILE__)\n"\
+									"  require 'rspec/rails'\n"
 					end
 				}
 			end
@@ -97,5 +124,7 @@ class Ander
 		end
 		f.close
 	end
+
+
 
 end
