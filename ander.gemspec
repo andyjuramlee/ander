@@ -8,6 +8,6 @@ Gem::Specification.new do |s|
   s.email       = 'andy.lee@flipp.com'
   s.files       = ["lib/ander.rb"]
   s.homepage    =
-    'http://rubygems.org/gems/ander'
+    'https://github.com/tearshock/ander'
   s.license       = ''
 end
