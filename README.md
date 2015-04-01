@@ -1,5 +1,5 @@
 # ander
-rspec setup made easy!
+rspec setup made easy for rails!
 
 ## Install
 
