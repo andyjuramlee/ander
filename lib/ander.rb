@@ -5,6 +5,7 @@ class Ander
 		self.run_setup_commands
 		self.configure_dotrspec
 		self.modify_spec_helper
+		self.add_sample_spec_file
 	end
 
 	def self.add_to_gemfile
@@ -125,6 +126,42 @@ class Ander
 		f.close
 	end
 
+	def self.add_sample_spec_file
+		f = open('spec/sample_spec.rb', 'w')
 
+		f.write	"require 'rails_helper'\n"
+
+		f.write	 "RSpec.describe 'Target Object' do\n"
+
+		f.write	 "  before(:all) do\n"
+		f.write	 "  # 'This gets executed before all test cases in current script'\n"
+		f.write	 "  end\n"
+
+		f.write	 "  before(:each) do\n"
+		f.write	 "  # 'This gets executed before each test cases in current script'\n"
+		f.write	 "  end\n"
+
+		f.write	 "  after(:all) do\n"
+		f.write	 "  # 'This gets executed after all test cases in current script'\n"
+		f.write	 "  end\n"
+
+		f.write	 "  after(:each) do\n"
+		f.write	 "  # 'This gets executed after each test cases in current script'\n"
+		f.write	 "  end\n"
+
+		f.write	 "  describe 'Title of test case:' do\n"
+		f.write	 "    context 'Context of your test case' do\n"
+		f.write	 "      let(:x) {\n"
+		f.write	 "        x = 'This gets executed upon calling for x'\n"
+		f.write	 "      }\n"
+		f.write	 "      it 'Expected result of your test case' do\n"
+		f.write	 "        expect(x).to eq('This gets executed upon calling for x')\n"
+		f.write	 "      end\n"
+		f.write	 "    end\n"
+		f.write	 "  end\n"
+		f.write	 "end\n"
+		f.close
+	end
 
 end
+
