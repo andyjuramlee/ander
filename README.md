@@ -1,6 +1,11 @@
 # ander
 rspec setup made easy for rails!
 
+## Included gems
+- 'rspec'
+- 'rspec-rails'
+- 'simplecov'
+
 ## Install
 
 ```

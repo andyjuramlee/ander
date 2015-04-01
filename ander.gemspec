@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'ander'
-  s.version     = '1.0.28'
+  s.version     = '1.0.29'
   s.date        = '2015-04-01'
 	s.platform    = Gem::Platform::RUBY
   s.summary     = "Performs all required steps to setup rspec on rails."
