@@ -9,5 +9,5 @@ Gem::Specification.new do |s|
   s.files       = ["lib/ander.rb"]
   s.homepage    =
     'https://github.com/tearshock/ander'
-  s.license       = ''
+  s.license       = 'MIT'
 end
