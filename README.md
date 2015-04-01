@@ -1,5 +1,5 @@
 # ander
-**How to use**
-1. Add ander to your Gemfile 
-2. Bundle install
-3. Run Ander.setup_all in your rails console
+**How to use**\n
+1. Add ander to your Gemfile\n 
+2. Bundle install\n
+3. Run Ander.setup_all in your rails console\n
