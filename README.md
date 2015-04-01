@@ -1,4 +1,15 @@
 # ander
+rspec setup made easy!
+
+## Install
+
+```
+gem install ander
+```
+
+## Requirements
+
+* Ruby 1.9.3 or higher
 
 ##**What it do**
   - Sets up rspec, rspec-rails and simplecov for your rails project
